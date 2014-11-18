@@ -13,7 +13,7 @@ class TrainingExecutor(object):
         self.learning_rate = learning_rate
         self.momentum = momentum
 
-        self.hidden_layers = 20
+        self.hidden_layers = 12
 
     def get_trained_network(self):
         network = buildNetwork(self.training_dataset.indim,  self.hidden_layers,

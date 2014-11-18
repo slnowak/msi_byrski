@@ -42,5 +42,5 @@ def train_network(training_dataset, test_dataset, epochs=10, learning_rate=0.01,
 if __name__ == '__main__':
     raw_data = DataReader().read_data('input')
     training_dataset, test_dataset = create_normalized_datasets(raw_data)
-    train_network(training_dataset, test_dataset, epochs=10, learning_rate=0.01, momentum=0.01)
+    train_network(training_dataset, test_dataset, epochs=5, learning_rate=0.01, momentum=0.01)
 

@@ -25,7 +25,7 @@ class DataSetCreator(object):
 
     def create_datasets(self, data, normalizer):
         normalized_data = normalizer.normalize(data)
-        training_data, test_data = normalized_data[:-50], normalized_data[-50:]
+        training_data, test_data = normalized_data[:-len(normalized_data)/4], normalized_data[-len(normalized_data)/4:]
         return self._filled_dataset(training_data), self._filled_dataset(test_data)
 
     def _filled_dataset(self, normalized_data):

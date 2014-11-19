@@ -1,3 +1,4 @@
+from audioop import bias
 from pybrain.supervised import BackpropTrainer
 from pybrain.tools.shortcuts import buildNetwork
 
@@ -13,11 +14,12 @@ class TrainingExecutor(object):
         self.learning_rate = learning_rate
         self.momentum = momentum
 
-        self.hidden_layers = 12
+        self.hidden_layers = 8
+        self.errors = []
 
     def get_trained_network(self):
         network = buildNetwork(self.training_dataset.indim,  self.hidden_layers,
-                               self.training_dataset.outdim, recurrent=True)
+                               self.training_dataset.outdim, recurrent=True, bias=True)
 
         trainer = BackpropTrainer(network, learningrate=self.learning_rate, momentum=self.momentum)
 
@@ -28,4 +30,5 @@ class TrainingExecutor(object):
 
         for _ in xrange(0, self.epochs):
             trainer.trainOnDataset(self.training_dataset, 1)
-            trainer.testOnData(self.test_dataset)
+            error = trainer.testOnData(self.test_dataset)
+            self.errors.append(error)

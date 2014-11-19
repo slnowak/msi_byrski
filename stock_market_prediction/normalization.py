@@ -6,19 +6,11 @@ __author__ = 'novy'
 
 class Normalizer(object):
     def normalize(self, data):
-        without_last_column = self._remove_last_column(data)
-        result = self._subtract_mean_and_divide_by_range(without_last_column)
-        return self._append_missing_column(result, data)
-
-    def _remove_last_column(self, data):
-        return data[::, :-1]
+        return self._subtract_mean_and_divide_by_range(data)
 
     def _subtract_mean_and_divide_by_range(self, array):
         return (array - array.mean(axis=0)) / (
             array.max(axis=0) - array.min(axis=0))
-
-    def _append_missing_column(self, result, data):
-        return numpy.append(result, data[::, -1:], axis=1)
 
 
 class DataSetCreator(object):
